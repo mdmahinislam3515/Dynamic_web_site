@@ -1,0 +1,315 @@
+<!-- Royal Cafe — Enhanced: Preloader, Scroll Animations, Particles, Images, Admin Dashboard -->
+
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Royal Cafe</title>
+  <meta name="description" content="Royal Cafe — Fresh Coffee, Cozy Place" />
+  <style>
+    :root{
+      --bg:#f3efe9; --card:#ffffffcc; --primary:#3b2618; --accent:#c78c4a; --muted:#7d7d7d; --radius:16px; --glass:rgba(255,255,255,0.36);
+    }
+    [data-theme="dark"]{ --bg:#151413; --card:rgba(40,40,40,0.7); --primary:#e9d8c4; --accent:#b8864a; --muted:#bdbdbd; --glass:rgba(255,255,255,0.04); }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Poppins,Inter,system-ui,-apple-system,Segoe UI,Roboto,'Helvetica Neue',Arial;background:var(--bg);color:#222}
+
+    /* Preloader */
+    #preloader{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(180deg,#111 0%,rgba(0,0,0,0.6) 70%);z-index:9999;flex-direction:column;color:#fff}
+    #preloader .logo{font-size:28px;font-weight:700;margin-bottom:18px}
+    .spinner{width:72px;height:72px;border-radius:50%;border:6px solid rgba(255,255,255,0.12);border-top-color:var(--accent);animation:spin 1s linear infinite}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    /* Header */
+    header{padding:28px 18px;text-align:center;background:linear-gradient(135deg,var(--primary),#56391f);color:#fff;border-bottom-left-radius:24px;border-bottom-right-radius:24px;box-shadow:0 10px 30px rgba(0,0,0,0.18)}
+    header h1{font-size:34px;margin:0}
+    header p{opacity:.9;margin-top:8px}
+
+    /* Nav */
+    nav{display:flex;gap:10px;justify-content:center;padding:12px;margin-top:-26px;position:sticky;top:12px;z-index:60}
+    nav button{background:var(--card);border:none;padding:10px 16px;border-radius:12px;cursor:pointer;font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,0.08)}
+    nav button.active{background:linear-gradient(90deg,#ffeede,#f0d8c9)}
+
+    /* Hero + particles */
+    .hero{position:relative;overflow:hidden;border-radius:20px;margin:28px auto;max-width:1200px}
+    .hero .bg{background-image:url('https://i.imgur.com/cR5XK4g.jpeg');background-size:cover;background-position:center;padding:110px 18px;color:#fff;text-align:center;text-shadow:0 6px 26px rgba(0,0,0,0.6)}
+    .hero h2{font-size:42px;margin:0}
+    .hero p{margin-top:8px;font-size:18px}
+    /* coffee beans */
+    .beans{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+    .bean{position:absolute;width:40px;height:40px;background-image:url('https://i.imgur.com/3G6z2qV.png');background-size:contain;background-repeat:no-repeat;opacity:.9}
+
+    /* Content */
+    .container{max-width:1200px;margin:0 auto;padding:28px}
+    .section-title{font-size:22px;color:var(--primary);margin-bottom:14px}
+
+    /* Menu cards with images */
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+    .card{background:var(--card);backdrop-filter:blur(8px);border-radius:14px;overflow:hidden;box-shadow:0 12px 30px rgba(0,0,0,0.12);transform:translateY(0);transition:transform .5s cubic-bezier(.2,.9,.2,1),box-shadow .3s}
+    .card.reveal{transform:translateY(-10px);box-shadow:0 18px 36px rgba(0,0,0,0.2)}
+    .card img{width:100%;height:160px;object-fit:cover;display:block}
+    .card .body{padding:14px}
+    .price{font-weight:800;color:var(--primary);margin-top:8px}
+
+    /* Contact */
+    form{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 8px 20px rgba(0,0,0,0.08)}
+    input,textarea{width:100%;padding:10px;border-radius:10px;border:1px solid #e6e6e6;margin-top:8px}
+    .btn{padding:10px 14px;border-radius:10px;background:var(--accent);color:#fff;border:none;cursor:pointer;font-weight:700}
+
+    /* Admin dashboard */
+    .admin-grid{display:grid;grid-template-columns:320px 1fr;gap:18px}
+    .panel{background:var(--card);padding:16px;border-radius:12px;box-shadow:0 10px 28px rgba(0,0,0,0.08)}
+    .stats{display:flex;gap:12px;flex-wrap:wrap}
+    .stat{flex:1;min-width:120px;padding:12px;border-radius:10px;background:linear-gradient(180deg,#fff,#fff0);text-align:center}
+    table{width:100%;border-collapse:collapse}
+    table th,table td{padding:8px;border-bottom:1px solid rgba(0,0,0,0.06);text-align:left}
+    .small-btn{padding:6px 8px;border-radius:8px;border:none;cursor:pointer}
+
+    /* Footer */
+    footer{text-align:center;padding:24px;margin-top:30px;color:var(--muted)}
+
+    /* Responsive */
+    @media(max-width:880px){.admin-grid{grid-template-columns:1fr}.hero .bg{padding:60px 18px}.card img{height:140px}}
+  </style>
+</head>
+<body>
+  <!-- Preloader -->
+  <div id="preloader" aria-hidden="false">
+    <div class="logo">Royal Cafe</div>
+    <div class="spinner" role="status" aria-label="Loading"></div>
+    <small style="opacity:.9;margin-top:12px">Preparing your cozy experience…</small>
+  </div>
+
+  <header>
+    <h1>Royal Cafe</h1>
+    <p>Fresh Coffee • Cozy Environment • Premium Taste</p>
+  </header>
+
+  <nav aria-label="Main navigation">
+    <button data-target="home" class="active">Home</button>
+    <button data-target="menu">Menu</button>
+    <button data-target="contact">Contact</button>
+    <button data-target="admin">Admin</button>
+  </nav>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="bg">
+        <h2>স্বাগতম Royal Cafe-এ</h2>
+        <p>শহরের সেরা কফির স্বাদ পেতে আজই চলে আসুন!</p>
+      </div>
+      <div class="beans" id="beans"></div>
+    </section>
+
+    <section id="menu" class="container" aria-labelledby="menu-title">
+      <h3 id="menu-title" class="section-title">Our Menu</h3>
+      <div class="grid" id="menuGrid"></div>
+    </section>
+
+    <section id="contact" class="container" aria-labelledby="contact-title">
+      <h3 id="contact-title" class="section-title">Contact Us</h3>
+      <form id="contactForm">
+        <label>নাম<input type="text" name="name" placeholder="Your name" required></label>
+        <label>ইমেইল<input type="email" name="email" placeholder="you@example.com" required></label>
+        <label>মেসেজ<textarea name="message" rows="4" placeholder="আপনার মেসেজ লিখুন"></textarea></label>
+        <div style="margin-top:10px;display:flex;gap:10px;align-items:center">
+          <button class="btn" type="submit">Send Message</button>
+          <div id="formStatus" style="color:var(--muted)"></div>
+        </div>
+      </form>
+      <h4 style="margin-top:18px">Recent messages</h4>
+      <ul id="messagesList" style="list-style:none;padding:0;margin:0;display:grid;gap:10px"></ul>
+    </section>
+
+    <section id="admin" class="container" aria-labelledby="admin-title">
+      <h3 id="admin-title" class="section-title">Admin Dashboard</h3>
+      <div class="admin-grid">
+        <div class="panel">
+          <h4>Quick Add</h4>
+          <form id="addItemForm">
+            <input type="text" name="itemName" placeholder="Name" required>
+            <input type="number" name="itemPrice" placeholder="Price (Tk)" required>
+            <input type="text" name="itemImg" placeholder="Image URL (optional)">
+            <input type="text" name="itemDesc" placeholder="Short description">
+            <div style="margin-top:10px;display:flex;gap:8px">
+              <button class="btn" type="submit">Add Item</button>
+              <button type="button" id="resetMenu" class="small-btn">Reset</button>
+            </div>
+          </form>
+          <div style="margin-top:18px">
+            <h5>Stats</h5>
+            <div class="stats">
+              <div class="stat">Menu: <strong id="statMenuCount">0</strong></div>
+              <div class="stat">Messages: <strong id="statMsgCount">0</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h4>Menu Items</h4>
+          <table id="itemsTable">
+            <thead><tr><th>Name</th><th>Price</th><th></th></tr></thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© <span id="year"></span> Royal Cafe. All Rights Reserved.</footer>
+
+  <script>
+    // --- Data + LocalStorage helpers
+    const defaultMenu = [
+      {id:1,name:'Cappuccino',price:150,img:'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=800&q=60',desc:'Classic frothy delight.'},
+      {id:2,name:'Latte',price:180,img:'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=60',desc:'Smooth and milky.'},
+      {id:3,name:'Mocha',price:200,img:'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=800&q=60',desc:'Chocolate + espresso.'}
+    ];
+    function load(key,fallback){try{const v=localStorage.getItem(key);return v?JSON.parse(v):fallback}catch(e){return fallback}}
+    function save(key,v){localStorage.setItem(key,JSON.stringify(v))}
+
+    let menu = load('royal_cafe_menu', defaultMenu.slice());
+    let messages = load('royal_cafe_messages', []);
+
+    // Elements
+    const menuGrid = document.getElementById('menuGrid');
+    const adminTable = document.querySelector('#itemsTable tbody');
+    const statMenuCount = document.getElementById('statMenuCount');
+    const statMsgCount = document.getElementById('statMsgCount');
+    const messagesList = document.getElementById('messagesList');
+
+    // Render menu cards (with images)
+    function renderMenu(){
+      menuGrid.innerHTML = '';
+      adminTable.innerHTML = '';
+      menu.forEach(item=>{
+        // card
+        const card = document.createElement('article');card.className='card reveal-on-scroll';
+        card.innerHTML = `<img src="${escapeHtml(item.img||'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800&q=60')}" alt="${escapeHtml(item.name)}"><div class="body"><h4 style="margin:0">${escapeHtml(item.name)}</h4><div style="color:var(--muted);font-size:13px">${escapeHtml(item.desc||'')}</div><div class="price">${item.price} Tk</div></div>`;
+        menuGrid.appendChild(card);
+
+        // admin table row
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${escapeHtml(item.name)}</td><td>${item.price} Tk</td><td style="text-align:right"><button class="small-btn" data-id="${item.id}" data-action="edit">Edit</button> <button class="small-btn" data-id="${item.id}" data-action="remove">Remove</button></td>`;
+        adminTable.appendChild(tr);
+      });
+      statMenuCount.textContent = menu.length;
+      initScrollReveal();
+    }
+
+    // Render messages
+    function renderMessages(){
+      messagesList.innerHTML='';
+      if(messages.length===0){ messagesList.innerHTML='<li style="color:var(--muted)">No messages yet.</li>'; return }
+      messages.forEach(m=>{
+        const li=document.createElement('li');li.style.background='var(--card)';li.style.padding='10px';li.style.borderRadius='10px';
+        li.innerHTML = `<strong>${escapeHtml(m.name)}</strong> <small style="color:var(--muted)">(${escapeHtml(m.email)})</small><div style="margin-top:6px">${escapeHtml(m.message)}</div><div style="font-size:12px;color:var(--muted);margin-top:6px">${new Date(m.createdAt).toLocaleString()}</div>`;
+        messagesList.appendChild(li);
+      });
+      statMsgCount.textContent = messages.length;
+    }
+
+    // Save + render helper
+    function saveAndRender(){ save('royal_cafe_menu', menu); renderMenu(); }
+
+    // Forms
+    document.getElementById('addItemForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const name = (fd.get('itemName')||'').toString().trim();
+      const price = Number(fd.get('itemPrice'))||0;
+      const img = (fd.get('itemImg')||'').toString().trim();
+      const desc = (fd.get('itemDesc')||'').toString().trim();
+      if(!name||!price) return alert('নাম এবং মূল্য দিন');
+      const item = {id:Date.now(),name,price,img,desc};
+      menu.unshift(item); saveAndRender(); e.target.reset();
+    });
+
+    document.getElementById('resetMenu').addEventListener('click', function(){ if(confirm('Reset menu to default?')){ menu = defaultMenu.slice(); saveAndRender(); } });
+
+    document.getElementById('contactForm').addEventListener('submit', function(e){
+      e.preventDefault();
+      const fd = new FormData(e.target);
+      const name = (fd.get('name')||'').toString().trim();
+      const email = (fd.get('email')||'').toString().trim();
+      const message = (fd.get('message')||'').toString().trim();
+      if(!name || !email || !message){ document.getElementById('formStatus').textContent = 'সব ফিল্ড পূরণ করুন'; return }
+      const msg = {id:Date.now(),name,email,message,createdAt:new Date().toISOString()};
+      messages.unshift(msg); save('royal_cafe_messages', messages); e.target.reset(); document.getElementById('formStatus').textContent = 'আপনার মেসেজ সেভ হয়েছে — ধন্যবাদ!'; renderMessages();
+    });
+
+    // Admin table actions
+    adminTable.addEventListener('click', function(e){
+      const btn = e.target.closest('button'); if(!btn) return;
+      const id = Number(btn.dataset.id);
+      const action = btn.dataset.action;
+      const idx = menu.findIndex(m=>m.id===id);
+      if(action==='remove' && idx>-1){ if(confirm('Remove item?')){ menu.splice(idx,1); saveAndRender(); } }
+      if(action==='edit' && idx>-1){ const newName = prompt('New name', menu[idx].name); if(newName){ menu[idx].name = newName; saveAndRender(); } }
+    });
+
+    // Navigation scroll
+    const navButtons = Array.from(document.querySelectorAll('nav button'));
+    navButtons.forEach(btn=>btn.addEventListener('click', ()=>{
+      const target = document.getElementById(btn.dataset.target);
+      if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+      navButtons.forEach(b=>b.classList.remove('active')); btn.classList.add('active');
+    }));
+
+    // Escape helper
+    function escapeHtml(str){ return String(str).replace(/[&<>'"]/g, ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":"&#39;"}[ch])); }
+
+    // Initial render
+    renderMenu(); renderMessages(); document.getElementById('year').textContent = new Date().getFullYear();
+
+    // --- Preloader hide after content ready ---
+    window.addEventListener('load', ()=>{
+      const pre = document.getElementById('preloader');
+      pre.style.transition = 'opacity .6s ease'; pre.style.opacity = '0'; setTimeout(()=>pre.remove(),700);
+    });
+
+    // --- Scroll-triggered reveal using IntersectionObserver ---
+    function initScrollReveal(){
+      const items = document.querySelectorAll('.reveal-on-scroll');
+      const obs = new IntersectionObserver((entries)=>{
+        entries.forEach(ent=>{
+          if(ent.isIntersecting){ ent.target.classList.add('reveal'); obs.unobserve(ent.target); }
+        });
+      },{threshold:0.15});
+      items.forEach(i=>obs.observe(i));
+    }
+    initScrollReveal();
+
+    // --- Floating coffee bean particles ---
+    (function spawnBeans(){
+      const beansRoot = document.getElementById('beans');
+      if(!beansRoot) return;
+      const beanImg = 'https://i.imgur.com/3G6z2qV.png'; // small coffee bean png
+      const count = 8;
+      for(let i=0;i<count;i++){
+        const b = document.createElement('div'); b.className='bean';
+        b.style.backgroundImage = `url(${beanImg})`;
+        const size = 24 + Math.random()*36; b.style.width = size + 'px'; b.style.height = size + 'px';
+        b.style.left = Math.random()*100 + '%'; b.style.top = (Math.random()*60 + 0) + '%';
+        const dur = 8 + Math.random()*12;
+        b.style.transition = `transform ${dur}s linear, top ${dur}s linear, left ${dur}s linear`;
+        beansRoot.appendChild(b);
+        // animate loop
+        (function animateBean(el){
+          const newLeft = Math.random()*100; const newTop = 60 + Math.random()*40;
+          el.style.transform = `rotate(${Math.random()*360}deg) translateY(${Math.random()*10 - 5}px)`;
+          el.style.left = newLeft + '%'; el.style.top = newTop + '%';
+          setTimeout(()=>animateBean(el), dur*1000 + Math.random()*2000);
+        })(b);
+      }
+    })();
+
+    // Small helper: ensure images lazy-load for performance
+    document.addEventListener('DOMContentLoaded', ()=>{
+      document.querySelectorAll('.card img').forEach(img=>{ img.loading='lazy'; });
+    });
+
+  </script>
+</body>
+</html>
