@@ -1,8 +1,7 @@
 :root{
   --bg:#f3efe9; --card:#ffffffcc; --primary:#3b2618; --accent:#c78c4a; --muted:#7d7d7d;
 }
-[data-theme="dark"]{ --bg:#151413; --card:rgba(40,40,40,0.85); --primary:#e9d8c4; --accent:#b8864a; --muted:#bdbdbd; }
-
+[data-theme="dark"]{ --bg:#151413;-webkit-text-fill-color:#ffffffcc ; --card:rgba(40,40,40,0.85); --primary:#e9d8c4; --accent:#b8864a; --muted:#bdbdbd; }
 *{box-sizing:border-box}
 body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;background:var(--bg);color:#222;line-height:1.45}
 
@@ -55,3 +54,4 @@ input,textarea{width:100%;padding:8px;border-radius:8px;border:1px solid #e8e8e8
   .header-inner{flex-direction:column;align-items:flex-start}
   .grid{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
 }
+
