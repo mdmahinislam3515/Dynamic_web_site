@@ -1,6 +1,6 @@
 /* Core Royal Cafe front-end logic
    - menu stored in localStorage 'royal_cafe_menu'
-   - users stored in 'royal_cafe_users' (demo only)
+   - users stored in 'royal_cafe_users' 
    - cart stored in 'royal_cafe_cart'
    - orders stored in 'royal_cafe_orders'
    - messages stored in 'royal_cafe_messages'
@@ -221,3 +221,4 @@ document.addEventListener('DOMContentLoaded', function(){
   // Preloader hide
   window.addEventListener('load', ()=>{ const pre = document.getElementById('preloader'); if(pre){ pre.style.transition='opacity .5s'; pre.style.opacity='0'; setTimeout(()=>pre.remove(),600); }});
 });
+
